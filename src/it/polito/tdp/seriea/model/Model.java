@@ -61,7 +61,7 @@ public class Model {
 		
 		
 		TeamPunteggio annata = null;
-		int degree = 0;
+		int degree = Integer.MIN_VALUE;
 		
 		creaGrafo(squadra);
 		
@@ -69,9 +69,9 @@ public class Model {
 			return this.getListaPunteggi(squadra).get(0);
 	
 		for(TeamPunteggio se : grafo.vertexSet()) {
-			if(grafo.inDegreeOf(se)> degree) {
+			if(grafo.inDegreeOf(se)-grafo.outDegreeOf(se)> degree) {
 				annata = se;
-				degree = grafo.inDegreeOf(se);
+				degree = grafo.inDegreeOf(se)-grafo.outDegreeOf(se);
 			}
 				
 		}
